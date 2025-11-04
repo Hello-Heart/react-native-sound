@@ -4,6 +4,7 @@ var ReactNative = require('react-native');
 var RNSound = ReactNative.NativeModules.RNSound;
 var IsAndroid = RNSound.IsAndroid;
 var IsWindows = RNSound.IsWindows;
+var resolveAssetSource = require("react-native/Libraries/Image/resolveAssetSource");
 var eventEmitter = new ReactNative.NativeEventEmitter(RNSound);
 
 var nextKey = 0;
@@ -13,7 +14,7 @@ function isRelativePath(path) {
 }
 
 function Sound(filename, basePath, onError, options) {
-  var asset = ReactNative.Image.resolveAssetSource(filename);
+  var asset = resolveAssetSource(filename);
   if (asset) {
     this._filename = asset.uri;
     onError = basePath;
